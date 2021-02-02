@@ -32,7 +32,7 @@ def load_nc(filename='./ERsst.mnmean.nc', train_test_ratio=0.7):
     # # data_list.to_csv('data.csv')
     #
     # joblib.dump(data_list, 'data.j')
-    data_list = joblib.load('data.j')
+    data_list = joblib.load('../data/data.j')
     data = data_list.dropna(axis=0, how='any')
     data = np.array(data).astype(float)
 
