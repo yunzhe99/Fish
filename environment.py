@@ -1,15 +1,11 @@
 import numpy as np
-import netCDF4 as nc
 
-file_path = './ERsst.mnmean.nc'
+from data_io import load_nc
+from train import xgb_model
 
-file_obj = nc.Dataset(file_path)
+if __name__ == "__main__":
+    train_X, train_y, test_X, test_y = load_nc(filename='ERsst.mnmean.nc')
 
-time_bnds = file_obj.variables['time_bnds'][:]
+    mae = xgb_model(train_X, train_y, test_X, test_y)
 
-sst = file_obj.variables['sst'][:]
-
-time = file_obj.variables['time']
-times = nc.num2date(time[:], time.units)
-
-print(sst.shape)
+    print(mae)
